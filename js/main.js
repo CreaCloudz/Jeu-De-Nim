@@ -1,23 +1,7 @@
-function game() {
-  player_one = prompt("Nom joueur 1");
-  player_two = prompt("Nom joueur 2");
+import Player from '/js/Player.js'
+import Game from '/js/Game.js'
 
-  items = 16;
-  last_play = player_one;
+let player_one = new Player("ttt");
+let player_two = new Player("tht");
 
-  number = 0;
-
-  while (items > 0) {
-    if (number <= 0 || number > 3) {
-      number = prompt("Il reste " + items + ". " + last_play + " combien d'allumette vous prenez (entre 1 et 3)");
-    } else {
-      items = (items - number);
-      number = 0;
-      if (items > 0)
-        last_play = (last_play == player_one ? player_two : player_one);
-    }
-  }
-  prompt(last_play + " a gagné");
-}
-
-game();
+new Game(player_one, player_two, 16, 0);
