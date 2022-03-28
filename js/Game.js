@@ -1,48 +1,43 @@
+import Player from '/js/Player.js'
+
 export default class Game {
-  constructor(player_one, player_two, items, tours) {
-    this.player_one = player_one;
-    this.player_two = player_two;
+  constructor(items) {
+    this.player_one = new Player(1);
+    this.player_two = new Player(2);
     this.items = items;
-    this.tours = tours;
+    this.tours = 0;
     this.number = 0;
-    this.last_play = player_one;
+    this.last_play = this.player_one;
   }
 
   init() {
     while (this.items > 0) {
-      if (this.number <= 0 || this.number > 3) {
+      if (this.number <= 0 || this.number > 3 || isNaN(this.number)) {
         this.number = prompt("Il reste " + this.items + ". " + this.last_play.name + " combien d'allumette vous prenez (entre 1 et 3)");
       } else {
         this.removeItems(this.number);
         this.resetNumber();
+        this.incTours();
         if (this.items > 0)
-          this.last_play = (last_play == this.player_one ? this.player_two : this.player_one)
+          this.last_play = (this.last_play == this.player_one ? this.player_two : this.player_one)
       }
     }
     this.winner();
   }
 
   winner() {
-    prompt(last_play.name + " a gagné !");
+    prompt(this.last_play.name + " a gagné en " + this.tours + " tour" + (this.tours > 1 ? "" : "s") + " !");
   }
 
   resetNumber() {
     this.number = 0;
   }
 
-  get getTours() {
-    return this.tours;
-  }
-
-  set setTours(tours) {
-    this.tours = tours;
-  }
-
-  get getItems() {
-    return this.items;
-  }
-
   removeItems(number) {
     this.items = (this.items - number);
+  }
+
+  incTours() {
+    this.tours++;
   }
 }

@@ -1,9 +1,5 @@
 export default class Player {
-  constructor(name) {
-    this.name = name;
-  }
-
-  get name() {
-    return this.name;
+  constructor(number) {
+    this.name = prompt("Nom du joueur " + number);
   }
 }
